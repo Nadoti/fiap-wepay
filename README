@@ -70,14 +70,11 @@ Bash
 git clone https://github.com/seu-usuario/seu-repositorio.git
 Instale as dependências:
 
-Bash
-
 npm install
 Inicie o projeto:
 
-Bash
+npx expo start -c
 
-npx expo start
 📱 Funcionalidades
 Dashboard: Resumo de saldo e transações.
 
