@@ -2,11 +2,10 @@ import { StyleSheet, Dimensions } from "react-native";
 import { colors } from "@/theme/colors";
 
 const { width, height } = Dimensions.get('window');
-const CALENDAR_WIDTH = width - 48; // Largura total menos paddings do modal
+const CALENDAR_WIDTH = width - 48;
 const CELL_WIDTH = CALENDAR_WIDTH / 7;
 
 export const styles = StyleSheet.create({
-  // --- ESTRUTURA BASE ---
   container: {
     flex: 1,
     backgroundColor: "#F5F7FA",
@@ -38,8 +37,6 @@ export const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: '600',
   },
-
-  // --- LISTA E CARDS ---
   listContent: {
     padding: 20,
     paddingBottom: 100,
@@ -88,8 +85,6 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#F0F2F5',
   },
-
-  // --- FILTROS (CHIPS) ---
   filterContainer: {
     paddingVertical: 12,
     backgroundColor: colors.white,
@@ -128,8 +123,6 @@ export const styles = StyleSheet.create({
     paddingBottom: 20,
     alignItems: 'center',
   },
-
-  // --- MODAL ---
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
@@ -140,7 +133,7 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 24,
-    height: height * 0.75, // Altura maior para caber o calendário
+    height: height * 0.75,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
@@ -158,8 +151,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.blue[800],
   },
-
-  // --- CALENDÁRIO CUSTOMIZADO (CSS NOVO) ---
   calHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -197,7 +188,7 @@ export const styles = StyleSheet.create({
   },
   dayCell: {
     width: CELL_WIDTH,
-    height: CELL_WIDTH, // Quadrado
+    height: CELL_WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 4,
@@ -207,8 +198,6 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
   },
-  
-  // Estados do Dia
   daySelectedStart: {
     backgroundColor: colors.blue[500],
     borderTopRightRadius: 0,
@@ -221,11 +210,11 @@ export const styles = StyleSheet.create({
   },
   daySelectedSingle: {
     backgroundColor: colors.blue[500],
-    borderRadius: CELL_WIDTH / 2, // Volta a ser bolinha se for único
+    borderRadius: CELL_WIDTH / 2,
   },
   dayInRange: {
-    backgroundColor: colors.blue[100], // Azul bem clarinho
-    borderRadius: 0, // Quadrado para preencher o meio
+    backgroundColor: colors.blue[100],
+    borderRadius: 0,
   },
   dayTextSelected: {
     color: colors.white,
@@ -235,10 +224,8 @@ export const styles = StyleSheet.create({
     width: CELL_WIDTH,
     height: CELL_WIDTH,
   },
-
-  // Botões de Ação do Modal
   modalActions: {
-    marginTop: 'auto', // Empurra para o fundo do modal
+    marginTop: 'auto',
     gap: 10,
   },
   applyButton: {

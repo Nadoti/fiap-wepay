@@ -1,0 +1,88 @@
+💰 WePay Mobile App
+Este é um aplicativo de controle financeiro desenvolvido com React Native (Expo) e Firebase Firestore. O projeto permite o gerenciamento de entradas e saídas, filtragem por datas e visualização de extratos.
+
+🚀 Como fazer o projeto funcionar
+1. Pré-requisitos
+Node.js instalado.
+
+Expo Go instalado no seu celular ou um emulador configurado.
+
+Uma conta no Firebase Console.
+
+2. Configuração do Firebase
+Para conectar o aplicativo ao seu banco de dados, siga estes passos:
+
+No Console do Firebase, crie um novo projeto.
+
+Adicione um app Web ao projeto para obter as credenciais.
+
+Crie um arquivo chamado firebaseConfig.ts (ou ajuste o existente) dentro da pasta de configuração do seu projeto e cole suas credenciais:
+
+TypeScript
+
+// Exemplo de estrutura do arquivo
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_AUTH_DOMAIN",
+  projectId: "SEU_PROJECT_ID",
+  storageBucket: "SEU_STORAGE_BUCKET",
+  messagingSenderId: "SEU_SENDER_ID",
+  appId: "SEU_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+3. Regras de Acesso ao Firestore (Importante)
+Como este projeto não utiliza autenticação de usuário (login) no momento, você precisa configurar as regras de segurança do Firestore para permitir que o aplicativo leia e escreva dados.
+
+No menu lateral do Firebase, vá em Firestore Database.
+
+Clique na aba Rules (Regras).
+
+Altere o código original para que fique exatamente assim:
+
+JavaScript
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+Clique em Publicar.
+
+Nota: Esta regra permite que qualquer pessoa com as chaves do seu projeto acesse os dados. Use apenas para fins de estudo ou desenvolvimento.
+
+4. Criando os Índices
+Para que os filtros de "Entrada", "Saída" e "Data" funcionem corretamente junto com a ordenação, o Firebase exige índices.
+
+Ao tentar filtrar no app pela primeira vez, verifique o console do VS Code. O Firebase gerará um link direto para você clicar e criar o índice necessário automaticamente.
+
+🛠️ Instalação Local
+Clone o repositório:
+
+Bash
+
+git clone https://github.com/seu-usuario/seu-repositorio.git
+Instale as dependências:
+
+Bash
+
+npm install
+Inicie o projeto:
+
+Bash
+
+npx expo start
+📱 Funcionalidades
+Dashboard: Resumo de saldo e transações.
+
+Nova Transação: Adição de ganhos ou gastos com categoria.
+
+Extrato: Lista completa com paginação (scroll infinito).
+
+Filtros: Filtragem por tipo e por período (Calendário customizado).

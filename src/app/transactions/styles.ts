@@ -4,7 +4,6 @@ import { colors } from "@/theme/colors";
 const { width } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
-  // ... (Mantenha seus estilos anteriores de container e header) ...
   container: {
     flex: 1,
     backgroundColor: "#F5F7FA",
@@ -25,13 +24,11 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.blue[800],
     textAlign: 'center',
-    marginRight: 24, // Compensa o ícone de voltar para centralizar
+    marginRight: 24,
   },
   backButton: {
     padding: 8,
   },
-  
-  // FORMULÁRIO
   formContent: {
     padding: 20,
   },
@@ -60,8 +57,6 @@ export const styles = StyleSheet.create({
     marginTop: 4,
     marginLeft: 4,
   },
-
-  // TIPO (ENTRADA / SAÍDA)
   typeContainer: {
     flexDirection: 'row',
     backgroundColor: '#E0E4E8',
@@ -87,47 +82,6 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#666',
   },
-  typeTextActive: {
-    color: colors.blue[800], // Ou verde/vermelho dependendo da lógica
-  },
-
-  // UPLOAD DE RECIBO
-  uploadContainer: {
-    marginTop: 10,
-    height: 150,
-    backgroundColor: colors.white,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#E0E4E8',
-    borderStyle: 'dashed',
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  uploadPlaceholder: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  uploadText: {
-    color: '#999',
-    fontSize: 14,
-    marginTop: 8,
-  },
-  previewImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  removeImageBtn: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    borderRadius: 20,
-    padding: 6,
-  },
-
-  // BOTÃO SALVAR
   submitButton: {
     backgroundColor: colors.blue[500],
     paddingVertical: 16,
@@ -144,8 +98,6 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  
-  // CATEGORIA CHIPS
   categoryList: {
     flexDirection: 'row',
     flexWrap: 'wrap',

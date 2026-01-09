@@ -19,18 +19,15 @@ export default function Transactions() {
   const params = useLocalSearchParams();
   const isEditing = !!params.id;
 
-  // --- ESTADOS DO FORMULÁRIO (Sem receiptUri) ---
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [type, setType] = useState<"entrada" | "saida">("saida");
   const [category, setCategory] = useState("");
 
-  // --- ESTADOS DE CONTROLE ---
   const [loading, setLoading] = useState(false);
   const [fetchingData, setFetchingData] = useState(false);
   const [errors, setErrors] = useState<{ title?: string, amount?: string, category?: string }>({});
 
-  // --- USE EFFECT: BUSCAR DADOS REAIS ---
   useEffect(() => {
     if (isEditing) {
       loadTransactionData();
@@ -46,7 +43,6 @@ export default function Transactions() {
 
       if (data) {
         setTitle(data.title);
-        // Formata valor para exibição (sem sinal negativo e com vírgula)
         setAmount(Math.abs(data.amount).toFixed(2).replace('.', ','));
 
         if (data.type) {
@@ -56,7 +52,6 @@ export default function Transactions() {
         }
 
         setCategory(data.category);
-        // Removido carregamento de receiptUrl
       } else {
         Alert.alert("Erro", "Transação não encontrada.");
         router.back();
@@ -69,7 +64,6 @@ export default function Transactions() {
     }
   };
 
-  // --- LÓGICA DE VALIDAÇÃO ---
   const validate = () => {
     let isValid = true;
     let newErrors = {};
@@ -94,8 +88,6 @@ export default function Transactions() {
     return isValid;
   };
 
-  // Removida função pickImage
-
   const handleSave = async () => {
     if (!validate()) return;
 
@@ -110,16 +102,13 @@ export default function Transactions() {
         amount: finalAmount,
         category,
         type,
-        // Define data apenas se for criação
         ...(isEditing ? {} : { date: new Date().toISOString() }),
       };
 
       if (isEditing && params.id) {
-        // ATUALIZAR (Sem argumentos de imagem)
         await updateTransaction(params.id as string, transactionData);
         Alert.alert("Sucesso", "Transação atualizada!");
       } else {
-        // CRIAR NOVA (Sem argumentos de imagem)
         await addTransaction({
           ...transactionData,
           date: new Date().toISOString()
@@ -141,7 +130,7 @@ export default function Transactions() {
     return (
       <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
         <ActivityIndicator size="large" color={colors.blue[500]} />
-        <Text style={{ marginTop: 10, color: '#666' }}>Carregando dados...</Text>
+        <Text style={{ marginTop: 10, color: colors.gray[500] }}>Carregando dados...</Text>
       </View>
     );
   }
@@ -162,24 +151,21 @@ export default function Transactions() {
       </View>
 
       <ScrollView contentContainerStyle={styles.formContent} showsVerticalScrollIndicator={false}>
-
-        {/* SELETOR DE TIPO */}
         <View style={styles.typeContainer}>
           <TouchableOpacity
             style={[styles.typeButton, type === 'entrada' && styles.typeButtonActive]}
             onPress={() => setType('entrada')}
           >
-            <Text style={[styles.typeText, type === 'entrada' && { color: '#27AE60' }]}>Entrada</Text>
+            <Text style={[styles.typeText, type === 'entrada' && { color: colors.green[500] }]}>Entrada</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.typeButton, type === 'saida' && styles.typeButtonActive]}
             onPress={() => setType('saida')}
           >
-            <Text style={[styles.typeText, type === 'saida' && { color: '#E74C3C' }]}>Saída</Text>
+            <Text style={[styles.typeText, type === 'saida' && { color: colors.red[400] }]}>Saída</Text>
           </TouchableOpacity>
         </View>
 
-        {/* VALOR */}
         <Text style={styles.label}>Valor (R$)</Text>
         <TextInput
           style={[styles.input, errors.amount && styles.inputError]}
@@ -190,7 +176,6 @@ export default function Transactions() {
         />
         {errors.amount && <Text style={styles.errorText}>{errors.amount}</Text>}
 
-        {/* TÍTULO */}
         <Text style={styles.label}>Descrição</Text>
         <TextInput
           style={[styles.input, errors.title && styles.inputError]}
@@ -200,7 +185,6 @@ export default function Transactions() {
         />
         {errors.title && <Text style={styles.errorText}>{errors.title}</Text>}
 
-        {/* CATEGORIA */}
         <Text style={styles.label}>Categoria</Text>
         <View style={styles.categoryList}>
           {CATEGORIES.map((cat) => (
@@ -217,26 +201,22 @@ export default function Transactions() {
         </View>
         {errors.category && <Text style={styles.errorText}>{errors.category}</Text>}
 
-        {/* ÁREA DE UPLOAD REMOVIDA DAQUI */}
-
-        {/* BOTÃO SALVAR */}
         <TouchableOpacity
           style={styles.submitButton}
           onPress={handleSave}
           disabled={loading}
         >
           {loading ? (
-            <ActivityIndicator color="#FFF" />
+            <ActivityIndicator color={colors.white} />
           ) : (
             <>
-              <Save size={20} color="#FFF" />
+              <Save size={20} color={colors.white} />
               <Text style={styles.submitText}>
                 {isEditing ? "Atualizar" : "Salvar Transação"}
               </Text>
             </>
           )}
         </TouchableOpacity>
-
       </ScrollView>
     </KeyboardAvoidingView>
   );
